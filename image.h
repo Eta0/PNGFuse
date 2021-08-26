@@ -308,7 +308,7 @@ struct Image {
      * @return The number of deleted chunks
      * @details Valid chunks are deleted in contiguous blocks from back-to-front to reduce copy/move operations.
      */
-    size_t clear_chunks() {
+    std::size_t clear_chunks() {
         const auto begin = image.data();
         const auto end = &image.back() + 1;
         std::vector<std::pair<Offset, Offset>> ranges;
@@ -363,12 +363,12 @@ protected:
      * Locates the end offset of the @c IDAT chunks in the image data, to initialize @c idat_end_pos.
      * @return The offset representing the location of the end of the last @c IDAT chunk in @c image
      */
-    Offset find_idat_end() {
+    Offset find_idat_end() const {
         const auto end = image.data() + image.size();
         auto chunk = lodepng_chunk_find_const(image.data() + 8, end, "IDAT");
         while (lodepng_chunk_type_equals(chunk, "IDAT"))
             chunk = lodepng_chunk_next_const(chunk, end);
-        return std::distance(static_cast<const unsigned char *>(image.data()), chunk);
+        return std::distance(image.data(), chunk);
     }
 };
 

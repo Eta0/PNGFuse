@@ -193,7 +193,7 @@ struct Arguments {
         }
     }
 
-    [[nodiscard]] inline size_t num_args() const { return args.size(); }
+    [[nodiscard]] inline std::size_t num_args() const { return args.size(); }
 };
 
 std::optional<path> Arguments::program_path = std::nullopt;

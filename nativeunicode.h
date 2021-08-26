@@ -110,7 +110,7 @@ std::vector<native_string> native_argv(int argc, char **argv) {
 static inline native_string string_to_lowercase(native_string s) {
     // via https://en.cppreference.com/w/cpp/string/byte/tolower
     if constexpr (std::is_same_v<native_string, std::wstring>)
-    std::transform(s.begin(), s.end(), s.begin(), [] (wchar_t c) { return towlower(c); });
+        std::transform(s.begin(), s.end(), s.begin(), [] (wchar_t c) { return towlower(c); });
     else
         std::transform(s.begin(), s.end(), s.begin(), [] (unsigned char c) { return tolower(c); });
     return s;
